@@ -1,1 +1,2 @@
-PACKAGECONFIG_append = " gles2 sm"
+# no-qml-debug breaks kdeclarative, which in turn is caused by qt cmake config files not containing the necessary defines...
+PACKAGECONFIG_append = " gles2 sm qml-debug"
