@@ -21,11 +21,13 @@ IMAGE_INSTALL_append = " \
     kitemmodels \
     kitemviews \
     kplotting \
+    ksyntaxhighlighting \
     kwayland \
     kwidgetsaddons \
     kwindowsystem \
     modemmanager-qt \
     networkmanager-qt \
+    oxygen-icons \
     prison \
     solid \
     sonnet \
@@ -46,9 +48,13 @@ IMAGE_INSTALL_append = " \
     kglobalaccel \
     kiconthemes \
     kio \
+    kpeople \
+    krunner \
     kservice \
     ktextwidgets \
     kxmlgui \
+    kxmlrpcclient \
+    plasma-framework \
     \
     kirigami \
 "
