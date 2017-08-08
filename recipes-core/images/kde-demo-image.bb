@@ -5,6 +5,7 @@ include recipes-core/images/core-image-minimal.bb
 IMAGE_INSTALL_append = " \
     qtbase-plugins \
     qtdeclarative-qmlplugins \
+    qtwayland \
     \
     attica \
     bluez-qt \
@@ -17,6 +18,7 @@ IMAGE_INSTALL_append = " \
     kdnssd \
     kguiaddons \
     ki18n \
+    kidletime \
     kimageformats \
     kitemmodels \
     kitemviews \
@@ -43,15 +45,24 @@ IMAGE_INSTALL_append = " \
     kpty \
     kunitconversion \
     \
+    kactivitiesstats \
     kbookmarks \
+    kcmutils \
     kdeclarative \
+    kded \
+    kdesu \
+    kemoticons \
     kglobalaccel \
     kiconthemes \
     kio \
+    knewstuff \
+    knotifyconfig \
+    kparts \
     kpeople \
     krunner \
     kservice \
     ktextwidgets \
+    kwallet \
     kxmlgui \
     kxmlrpcclient \
     plasma-framework \
