@@ -20,6 +20,7 @@ IMAGE_INSTALL_append = " \
     ki18n \
     kidletime \
     kimageformats \
+    kirigami \
     kitemmodels \
     kitemviews \
     kplotting \
@@ -45,6 +46,7 @@ IMAGE_INSTALL_append = " \
     kpty \
     kunitconversion \
     \
+    baloo \
     kactivitiesstats \
     kbookmarks \
     kcmutils \
@@ -61,11 +63,13 @@ IMAGE_INSTALL_append = " \
     kpeople \
     krunner \
     kservice \
+    ktexteditor \
     ktextwidgets \
     kwallet \
     kxmlgui \
     kxmlrpcclient \
     plasma-framework \
+    qqc2-desktop-style \
     \
-    kirigami \
+    heaptrack \
 "
