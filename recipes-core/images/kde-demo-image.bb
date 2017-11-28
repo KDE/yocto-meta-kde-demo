@@ -5,9 +5,10 @@ include recipes-core/images/core-image-minimal.bb
 IMAGE_INSTALL_append = " \
     qtbase-plugins \
     qtdeclarative-qmlplugins \
-    qtwayland \
     \
     kde-frameworks5 \
+    \
+    plasma-mobile \
     \
     heaptrack \
 "
