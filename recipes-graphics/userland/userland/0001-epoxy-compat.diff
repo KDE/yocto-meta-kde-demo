@@ -1,0 +1,18 @@
+--- a/interface/khronos/include/GLES2/gl2.h
++++ b/interface/khronos/include/GLES2/gl2.h
+@@ -67,6 +67,7 @@
+ #endif
+
+ /* OpenGL ES core versions */
++#ifndef GL_ES_VERSION_2_0
+ #define GL_ES_VERSION_2_0                 1
+
+ /* ClearBufferMask */
+@@ -642,6 +643,7 @@
+ GL_APICALL void         GL_APIENTRY glVertexAttribPointer (GLuint indx, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid* ptr);
+ GL_APICALL void         GL_APIENTRY glViewport (GLint x, GLint y, GLsizei width, GLsizei height);
+
++#endif
+ #ifdef __cplusplus
+ }
+ #endif
