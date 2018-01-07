@@ -10,6 +10,7 @@ IMAGE_INSTALL_append = " \
     qtbase-plugins \
     qtdeclarative-qmlplugins \
     qttools-tools \
+    liberation-fonts \
     \
     kde-frameworks5 \
     \

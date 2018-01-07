@@ -1,5 +1,5 @@
 # no-qml-debug breaks kdeclarative, which in turn is caused by qt cmake config files not containing the necessary defines...
-PACKAGECONFIG_append = " \
+PACKAGECONFIG_append += " \
     gles2 \
     sm \
     qml-debug \
@@ -13,8 +13,8 @@ PACKAGECONFIG_append = " \
     libpng \
     gif \
     dbus \
-    icu \
     udev \
+    accessibility \
 "
 
 # qemux86_64 fails with gold later on when using a gold-built Qt
