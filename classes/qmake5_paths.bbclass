@@ -13,7 +13,7 @@ QMAKE_MKSPEC_PATH_class-native = "${QMAKE_MKSPEC_PATH_NATIVE}"
 QMAKE_MKSPEC_PATH_class-nativesdk = "${QMAKE_MKSPEC_PATH_NATIVE}"
 
 OE_QMAKE_PATH_PREFIX = "${prefix}"
-OE_QMAKE_PATH_HEADERS = "${includedir}${QT_DIR_NAME}"
+OE_QMAKE_PATH_HEADERS = "${includedir}/qt5"
 OE_QMAKE_PATH_LIBS = "${libdir}"
 OE_QMAKE_PATH_ARCHDATA = "${libdir}"
 OE_QMAKE_PATH_DATA = "${datadir}"
@@ -39,7 +39,7 @@ OE_QMAKE_PATH_EXTERNAL_HOST_BINS = "${STAGING_BINDIR_NATIVE}${QT_DIR_NAME}"
 # This block is usefull for components which install their
 # own files without QT_DIR_NAME but need to reference paths e.g.
 # with QT headers
-OE_QMAKE_PATH_QT_HEADERS = "${includedir}${QT_DIR_NAME}"
+OE_QMAKE_PATH_QT_HEADERS = "${includedir}/qt5"
 OE_QMAKE_PATH_QT_ARCHDATA = "${libdir}${QT_DIR_NAME}"
 OE_QMAKE_PATH_QT_DATA = "${datadir}${QT_DIR_NAME}"
 OE_QMAKE_PATH_QT_BINS = "${bindir}${QT_DIR_NAME}"
