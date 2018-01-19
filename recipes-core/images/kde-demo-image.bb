@@ -17,4 +17,6 @@ IMAGE_INSTALL_append = " \
     plasma-mobile \
     \
     heaptrack \
+    \
+    useradd-kde \
 "
