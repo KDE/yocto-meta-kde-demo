@@ -15,6 +15,7 @@ PACKAGECONFIG_append += " \
     dbus \
     udev \
     accessibility \
+    cups \
 "
 
 # qemux86_64 fails with gold later on when using a gold-built Qt
