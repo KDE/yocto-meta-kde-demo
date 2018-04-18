@@ -1,0 +1,14 @@
+# Docker build environment
+
+This is an attempt to isolate the yocto build from variations in the host system.
+
+This is full of assumptions about my specific setup, so use with care!
+
+## Build docker image
+
+docker build -t vkrause/yocto .
+
+## Use docker image
+
+docker run -it --rm -v /k/yocto/src/:/yocto vkrause/yocto
+
