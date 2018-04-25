@@ -32,5 +32,5 @@ RUN useradd -u 1000 -g 100 -m yoctouser
 
 USER yoctouser
 ENV LANG=en_US.UTF-8
-WORKDIR /yocto
+WORKDIR /k/yocto
 CMD /bin/bash

@@ -10,5 +10,5 @@ docker build -t vkrause/yocto .
 
 ## Use docker image
 
-docker run -it --rm -v /k/yocto/src/:/yocto vkrause/yocto
+docker run -it --rm -v /k/yocto:/k/yocto vkrause/yocto
 
