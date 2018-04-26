@@ -27,7 +27,8 @@ RUN zypper --non-interactive install \
     sudo  \
     iproute2 \
     libSDL-devel \
-    hostname
+    hostname \
+    tmux
 RUN useradd -u 1000 -g 100 -m yoctouser
 
 USER yoctouser
