@@ -6,6 +6,8 @@ IMAGE_INSTALL_append = " \
     dropbear \
     gdb \
     strace \
+    kernel-modules \
+    linux-firmware \
     \
     qtbase-plugins \
     qtdeclarative-qmlplugins \
