@@ -8,10 +8,11 @@ IMAGE_INSTALL_append = " \
     strace \
     kernel-modules \
     linux-firmware \
+    sddm \
     \
     qtbase-plugins \
-    qtdeclarative-qmlplugins \
     qttools-tools \
+    qtsvg-plugins \
     liberation-fonts \
     \
     kde-frameworks5 \
