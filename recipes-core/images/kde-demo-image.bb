@@ -20,6 +20,7 @@ IMAGE_INSTALL_append = " \
     plasma-mobile \
     \
     kirigami-gallery \
+    okular \
     \
     heaptrack \
     kdeconnect-kde \
