@@ -19,7 +19,10 @@ IMAGE_INSTALL_append = " \
     \
     plasma-mobile \
     \
+    kirigami-gallery \
+    \
     heaptrack \
+    kdeconnect-kde \
     \
     useradd-kde \
 "
