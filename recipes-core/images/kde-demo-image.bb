@@ -23,5 +23,8 @@ IMAGE_INSTALL_append = " \
     heaptrack \
     kdeconnect-kde \
     \
+    koko \
+    plasma-camera \
+    \
     useradd-kde \
 "
