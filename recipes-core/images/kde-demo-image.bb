@@ -14,6 +14,9 @@ IMAGE_INSTALL_append = " \
     qttools-tools \
     qtsvg-plugins \
     liberation-fonts \
+    ttf-noto \
+    ttf-noto-cjk \
+    libreoffice-dictionaries \
     \
     kde-frameworks5 \
     \
