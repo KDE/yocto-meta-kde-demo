@@ -17,6 +17,7 @@ PACKAGECONFIG_append += " \
     accessibility \
     cups \
 "
+PACKAGECONFIG_remove += "tests"
 
 # qemux86_64 fails with gold later on when using a gold-built Qt
 QT_CONFIG_FLAGS_append = " \
