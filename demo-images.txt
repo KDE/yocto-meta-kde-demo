@@ -1,0 +1,18 @@
+Revisions used for demo images:
+
+FOSDEM 2019
+
+poky: b44e88c09baa93b6cc14bef8de986c387fa6e7b3
+meta-openembedded: b56fc26fefff498b10236ea6486a5d5624f726cc
+meta-java: a6f135f7ac72fbaea2a02986dd9c18df720bf3fa
+meta-raspberrypi: e713c3f60d74fbb864122f8f11a80ca302d53da3
+meta-qt5: v5.11.1
+
+
+Akademy 2019
+
+poky: b44e88c09baa93b6cc14bef8de986c387fa6e7b3
+meta-openembedded: b56fc26fefff498b10236ea6486a5d5624f726cc
+meta-java: a6f135f7ac72fbaea2a02986dd9c18df720bf3fa
+meta-raspberrypi: e713c3f60d74fbb864122f8f11a80ca302d53da3
+meta-qt5: v5.12.4
