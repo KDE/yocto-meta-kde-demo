@@ -15,12 +15,11 @@ IMAGE_INSTALL_append = " \
     qtsvg-plugins \
     liberation-fonts \
     ttf-noto \
-    ttf-noto-cjk \
     libreoffice-dictionaries \
     \
-    kde-frameworks5 \
+    packagegroup-kde-frameworks5 \
     \
-    plasma-mobile \
+    packagegroup-plasma-mobile \
     kde-applications \
     \
     heaptrack \
