@@ -1,4 +1,4 @@
-FROM opensuse:42.3
+FROM opensuse/leap:15.2
 
 RUN zypper --non-interactive install \
     bash-completion \
@@ -28,7 +28,9 @@ RUN zypper --non-interactive install \
     iproute2 \
     libSDL-devel \
     hostname \
-    tmux
+    tmux \
+    bzip2 \
+    gzip
 RUN useradd -u 1000 -g 100 -m yoctouser
 
 USER yoctouser
