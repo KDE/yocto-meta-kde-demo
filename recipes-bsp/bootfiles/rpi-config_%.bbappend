@@ -9,5 +9,5 @@ do_deploy_append_raspberrypi4() {
 }
 
 # DISPLAY_ROTATE= "1"
-ENABLE_UART = "1"
+# ENABLE_UART = "1"
 GPU_MEM_1024_raspberrypi3-64 = "256"
