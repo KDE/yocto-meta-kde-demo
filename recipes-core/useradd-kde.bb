@@ -9,5 +9,5 @@ inherit useradd
 
 ALLOW_EMPTY_${PN} = "1"
 USERADD_PACKAGES = "${PN}"
-USERADD_PARAM_${PN} = "-d /home/kde -P kde -g 1000 kde"
-GROUPADD_PARAM_${PN} = "-g 1000 user"
+USERADD_PARAM_${PN} = "-d /home/kde -P kde -g user kde"
+GROUPADD_PARAM_${PN} = "user"
