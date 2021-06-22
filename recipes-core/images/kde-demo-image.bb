@@ -20,13 +20,16 @@ IMAGE_INSTALL_append = " \
     packagegroup-kde-frameworks5 \
     \
     packagegroup-plasma-mobile \
-    kde-applications \
+    packagegroup-kde-applications \
     \
     heaptrack \
     kdeconnect-kde \
     \
-    koko \
     plasma-camera \
     \
     useradd-kde \
+"
+
+IMAGE_INSTALL_append_raspberrypi4 = " \
+    rpi-gpio \
 "
