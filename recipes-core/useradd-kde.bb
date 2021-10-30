@@ -7,7 +7,7 @@ S = "${WORKDIR}"
 
 inherit useradd
 
-ALLOW_EMPTY_${PN} = "1"
+ALLOW_EMPTY:${PN} = "1"
 USERADD_PACKAGES = "${PN}"
-USERADD_PARAM_${PN} = "-d /home/kde -P kde -g user kde"
-GROUPADD_PARAM_${PN} = "user; systemd-journal"
+USERADD_PARAM:${PN} = "-d /home/kde -P kde -g user kde"
+GROUPADD_PARAM:${PN} = "user; systemd-journal"

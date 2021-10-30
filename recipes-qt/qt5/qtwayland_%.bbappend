@@ -1,4 +1,4 @@
-PACKAGECONFIG_remove += " \
+PACKAGECONFIG:remove += " \
     xcomposite-egl \
     xcomposite-glx \
 "
