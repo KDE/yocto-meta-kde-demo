@@ -2,7 +2,7 @@
 include recipes-core/images/core-image-minimal.bb
 
 # Include modules in rootfs // kernel-modules is from rpi-hwup-image - needed?
-IMAGE_INSTALL_append = " \
+IMAGE_INSTALL:append = " \
     dropbear \
     gdb \
     strace \
@@ -30,6 +30,6 @@ IMAGE_INSTALL_append = " \
     useradd-kde \
 "
 
-IMAGE_INSTALL_append_raspberrypi4 = " \
+IMAGE_INSTALL:append:raspberrypi4 = " \
     rpi-gpio \
 "

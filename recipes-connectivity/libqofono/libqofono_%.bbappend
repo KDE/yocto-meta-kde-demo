@@ -1,3 +1,3 @@
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${libdir}/qml/MeeGo/QOfono/* \
 "
