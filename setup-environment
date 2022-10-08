@@ -20,28 +20,40 @@
 # Add options for the script
 # Copyright (C) 2013 Freescale Semiconductor, Inc.
 
-CWD=`pwd`
-PROGNAME="setup-environment"
+CWD=$(pwd)
+
+# identify directory with meta-layers, support both top layer location and nested sources/ structure
+SOURCES=${CWD}
+if [ -e "${CWD}/sources" ]; then
+    SOURCES=${CWD}/sources
+fi
+
+THIS_SCRIPT="setup-environment"
+if [ "$(basename -- $0)" = "${THIS_SCRIPT}" ]; then
+  echo "Error: This script needs to be sourced. Please run as '. $0'"
+  return 1
+fi
 
 usage()
 {
-    echo -e "\nUsage: . $PROGNAME <build-dir>
+    echo -e "\nUsage: . ${THIS_SCRIPT} <build-dir>
     <build-dir>: specifies the build directory location (required)
 
 If undefined, this script will set \$MACHINE to 'raspberrypi'.
 
-Supported machines: `echo; ls */conf/machine/*.conf */*/conf/machine/*.conf \
-| sed s/\.conf//g | sed -r 's/^.+\///' | xargs -I% echo -e "\t%"`
+Supported machines: $(echo; \
+    ls ${SOURCES}/*/conf/machine/*.conf ${SOURCES}/*/*/conf/machine/*.conf \
+    | sed s/\.conf//g | sed -r 's/^.+\///' | xargs -I% echo -e "\t%")
 
 To build for a machine listed above, run this script as:
-MACHINE=<machine> . $PROGNAME <build-dir>
+MACHINE=<machine> . ${THIS_SCRIPT} <build-dir>
 "
 }
 
 clean_up()
 {
    unset LIST_MACHINES VALID_MACHINE
-   unset CWD TEMPLATES SHORTOPTS LONGOPTS ARGS PROGNAME
+   unset CWD SOURCES TEMPLATES SHORTOPTS LONGOPTS ARGS PROGNAME
    unset generated_config updated
    unset MACHINE SDKMACHINE DISTRO OEROOT
 }
@@ -79,12 +91,13 @@ if [ "$(whoami)" = "root" ]; then
 fi
 
 if [ -z "$MACHINE" ]; then
+    echo "WARNING: no MACHINE variable set, defaulting to MACHINE=raspberrypi"
     MACHINE='raspberrypi'
 fi
 
 # Check the machine type specified
-LIST_MACHINES=`ls -1 $CWD/*/conf/machine $CWD/*/*/conf/machine`
-VALID_MACHINE=`echo -e "$LIST_MACHINES" | grep ${MACHINE}.conf$ | wc -l`
+LIST_MACHINES=$(ls -1 ${SOURCES}/*/conf/machine ${SOURCES}/*/*/conf/machine)
+VALID_MACHINE=$(echo -e "$LIST_MACHINES" | grep ${MACHINE}.conf$ | wc -l)
 if [ "x$MACHINE" = "x" ] || [ "$VALID_MACHINE" = "0" ]; then
     echo -e "\nThe \$MACHINE you have specified ($MACHINE) is not supported by this build setup"
     usage && clean_up
@@ -103,28 +116,9 @@ if [ -z "$DISTRO" ]; then
     DISTRO='kde-linux'
 fi
 
-OEROOT=`readlink -f poky`
+OEROOT=$(readlink -f ${SOURCES}/poky)
 
-# Ensure all files in base are kept in sync with project root
-# updated=
-# for f in $CWD/base/*; do
-#     file="$(basename $f)"
-#     if [ "$file" = "conf" ] || echo $file | grep -q '~$'; then
-#         continue
-#     fi
-#
-#     if ! cmp -s "$file" "$f"; then
-#         updated="true"
-#         [ -e $file ] && chmod u+w $file
-#         cp $f $file
-#     fi
-# done
-# if [ "$updated" = "true" ]; then
-#     echo "The project root content has been updated. Please run '$PROGNAME' again."
-#     return
-# fi
-
-cd $OEROOT
+cd ${OEROOT}
 
 . ./oe-init-build-env $CWD/$1 > /dev/null
 
@@ -137,7 +131,7 @@ if [ ! -e conf/local.conf.sample ]; then
     mv conf/local.conf conf/local.conf.sample
 
     # Generate the local.conf based on the Yocto defaults
-    TEMPLATES=$CWD/yocto-meta-kde-demo/setup
+    TEMPLATES=${SOURCES}/meta-kde-demo/setup
     grep -v '^#\|^$' conf/local.conf.sample > conf/local.conf
 
     # Change settings according environment
