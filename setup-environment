@@ -23,9 +23,9 @@
 CWD=$(pwd)
 
 # identify directory with meta-layers, support both top layer location and nested sources/ structure
-SOURCES=${CWD}
+SOURCESDIR=${CWD}
 if [ -e "${CWD}/sources" ]; then
-    SOURCES=${CWD}/sources
+    SOURCESDIR=${CWD}/sources
 fi
 
 THIS_SCRIPT="setup-environment"
@@ -42,7 +42,7 @@ usage()
 If undefined, this script will set \$MACHINE to 'raspberrypi'.
 
 Supported machines: $(echo; \
-    ls ${SOURCES}/*/conf/machine/*.conf ${SOURCES}/*/*/conf/machine/*.conf \
+    ls ${SOURCESDIR}/*/conf/machine/*.conf ${SOURCESDIR}/*/*/conf/machine/*.conf \
     | sed s/\.conf//g | sed -r 's/^.+\///' | xargs -I% echo -e "\t%")
 
 To build for a machine listed above, run this script as:
@@ -85,7 +85,7 @@ fi
 BUILDDIRECTORY=${BUILDDIRECTORY:-build-${MACHINE}}
 
 # Check the machine type specified
-LIST_MACHINES=$(ls -1 ${SOURCES}/*/conf/machine ${SOURCES}/*/*/conf/machine)
+LIST_MACHINES=$(ls -1 ${SOURCESDIR}/*/conf/machine ${SOURCESDIR}/*/*/conf/machine)
 VALID_MACHINE=$(echo -e "${LIST_MACHINES}" | grep ${MACHINE}.conf$ | wc -l)
 if [ "x$MACHINE" = "x" ] || [ "$VALID_MACHINE" = "0" ]; then
     echo -e "\nThe \$MACHINE you have specified ($MACHINE) is not supported by this build setup"
@@ -105,7 +105,7 @@ if [ -z "$DISTRO" ]; then
     DISTRO='kde-linux'
 fi
 
-OEROOT=$(readlink -f ${SOURCES}/poky)
+OEROOT=$(readlink -f ${SOURCESDIR}/poky)
 
 cd ${OEROOT}
 
@@ -116,20 +116,35 @@ cd ${OEROOT}
 export PATH="`echo $PATH | sed 's/\(:.\|:\)*:/:/g;s/^.\?://;s/:.\?$//'`"
 
 generated_config=
-if [ ! -e conf/local.conf.sample ]; then
-    mv conf/local.conf conf/local.conf.sample
+if [ ! -e ${BUILDDIRECTORY}/conf ]; then
+    # generate bblayers for specific hardware variant
+    case ${MACHINE} in
+        raspberrypi*)
+            LAYERSCONF="bblayers.conf.rpi.sample"
+            ;;
+        *)
+            LAYERSCONF="bblayers.conf.sample"
+            ;;
+    esac
 
     # Generate the local.conf based on the Yocto defaults
-    TEMPLATES=${SOURCES}/meta-kde-demo/setup
-    grep -v '^#\|^$' conf/local.conf.sample > conf/local.conf
+    TEMPLATESDIR=${SOURCESDIR}/meta-kde-demo/templates
 
-    # Change settings according environment
+    LAYERSCONF=${TEMPLATESDIR}/${LAYERSCONF}
+    if [ ! -e ${LAYERSCONF} ]; then
+        echo "ERROR: Layer configuration file missing: '${LAYERSCONF}'"
+        return 1
+    fi
+    mkdir -p ${CWD}/${BUILDDIRECTORY}/conf
+    cp ${LAYERSCONF} ${CWD}/${BUILDDIRECTORY}/conf/bblayers.conf
+
+    # Generate local.conf from poky example
+    cp ${SOURCESDIR}/poky/meta-poky/conf/local.conf.sample ${CWD}/${BUILDDIRECTORY}/conf/local.conf.sample
+    grep -v '^#\|^$' ${CWD}/${BUILDDIRECTORY}/conf/local.conf.sample > ${CWD}/${BUILDDIRECTORY}/conf/local.conf
     sed -e "s,MACHINE ??=.*,MACHINE ??= '$MACHINE',g" \
         -e "s,SDKMACHINE ??=.*,SDKMACHINE ??= '$SDKMACHINE',g" \
         -e "s,DISTRO ?=.*,DISTRO ?= '$DISTRO',g" \
         -i conf/local.conf
-
-    cp $TEMPLATES/* conf/
 
     for s in $HOME/.oe $HOME/.yocto; do
         if [ -e $s/site.conf ]; then
