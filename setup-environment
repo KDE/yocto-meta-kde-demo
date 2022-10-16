@@ -135,6 +135,9 @@ if [ ! -e ${BUILDDIRECTORY}/conf ]; then
         -e "s,DISTRO ?=.*,DISTRO ?= '$DISTRO',g" \
         -i conf/local.conf
 
+    # allow building of ffmpeg
+    echo "LICENSE_FLAGS_ACCEPTED=\"commercial\"" >> ${CWD}/${BUILDDIRECTORY}/conf/local.conf
+
     for s in $HOME/.oe $HOME/.yocto; do
         if [ -e $s/site.conf ]; then
             echo "Linking $s/site.conf to conf/site.conf"
