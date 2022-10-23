@@ -1,8 +1,6 @@
-# no-qml-debug breaks kdeclarative, which in turn is caused by qt cmake config files not containing the necessary defines...
 PACKAGECONFIG:append = " \
     gles2 \
     sm \
-    qml-debug \
     openssl \
     fontconfig \
     freetype \
