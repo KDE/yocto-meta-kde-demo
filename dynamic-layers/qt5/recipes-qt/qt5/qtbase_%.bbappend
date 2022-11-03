@@ -1,4 +1,4 @@
-PACKAGECONFIG:append = " \
+PACKAGECONFIG:append:class-target = " \
     gles2 \
     sm \
     openssl \
@@ -15,6 +15,7 @@ PACKAGECONFIG:append = " \
     accessibility \
     cups \
 "
+
 PACKAGECONFIG:remove = "tests"
 
 # qemux86_64 fails with gold later on when using a gold-built Qt
