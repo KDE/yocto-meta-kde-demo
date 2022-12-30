@@ -14,6 +14,9 @@ PACKAGECONFIG:append:class-target = " \
     udev \
     accessibility \
     cups \
+    gbm \
+    kms \
+    eglfs \
 "
 
 PACKAGECONFIG:remove = "tests"
