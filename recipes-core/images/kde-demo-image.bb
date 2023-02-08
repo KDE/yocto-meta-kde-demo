@@ -7,7 +7,6 @@ IMAGE_INSTALL:append = " \
     gdb \
     strace \
     kernel-modules \
-    linux-firmware \
     sddm \
     \
     qtbase-plugins \
@@ -31,5 +30,6 @@ IMAGE_INSTALL:append = " \
 "
 
 IMAGE_INSTALL:append:raspberrypi4 = " \
+    linux-firmware \
     rpi-gpio \
 "
