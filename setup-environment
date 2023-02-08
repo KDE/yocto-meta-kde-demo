@@ -122,6 +122,9 @@ if [ ! -e ${BUILDDIRECTORY}/conf ]; then
         raspberrypi*)
             LAYERSCONF="bblayers.conf.rpi${QT_SUFFIX}.sample"
             ;;
+        visionfive2*)
+            LAYERSCONF="bblayers.conf.visionfive2${QT_SUFFIX}.sample"
+            ;;
         *)
             LAYERSCONF="bblayers.conf.sample"
             ;;
