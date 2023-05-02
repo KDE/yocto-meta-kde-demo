@@ -5,7 +5,7 @@
 # SPDX-FileCopyrightText: 2012, 2013 O.S. Systems Software LTDA.
 # SPDX-FileContributor: Otavio Salvador <otavio@ossystems.com.br>
 # SPDX-FileCopyrightText: 2017 Volker Krause <vkrause@kde.org>
-# SPDX-FileCopyrightText: 2022 Andreas Cord-Landwehr <cordlandwehr@kde.org>
+# SPDX-FileCopyrightText: 2022-2023 Andreas Cord-Landwehr <cordlandwehr@kde.org>
 #
 # SPDX-License-Identifier: GPL-2.0-only
 
@@ -23,6 +23,8 @@ if [ "$(basename -- $0)" = "${THIS_SCRIPT}" ]; then
     return 1
 fi
 
+LIST_MACHINES=$(ls -1 ${SOURCESDIR}/*/conf/machine)
+
 usage()
 {
     echo -e "\nUsage: . ${THIS_SCRIPT} <build-dir>
@@ -31,7 +33,7 @@ usage()
 If undefined, this script will set \$MACHINE to 'raspberrypi'.
 
 Supported machines: $(echo; \
-    ls ${SOURCESDIR}/*/conf/machine/*.conf ${SOURCESDIR}/*/*/conf/machine/*.conf \
+    echo ${LIST_MACHINES} \
     | sed s/\.conf//g | sed -r 's/^.+\///' | xargs -I% echo -e "\t%")
 
 To build for a machine listed above, run this script as:
@@ -73,14 +75,13 @@ if [ "$(whoami)" = "root" ]; then
 fi
 
 if [ -z "$MACHINE" ]; then
-    echo "WARNING: no MACHINE variable set, defaulting to MACHINE=raspberrypi"
-    MACHINE='raspberrypi'
+    echo "WARNING: no MACHINE variable set, defaulting to MACHINE=raspberrypi4"
+    MACHINE='raspberrypi4'
 fi
 
 BUILDDIRECTORY=${BUILDDIRECTORY:-build-${MACHINE}}
 
 # Check the machine type specified
-LIST_MACHINES=$(ls -1 ${SOURCESDIR}/*/conf/machine ${SOURCESDIR}/*/*/conf/machine)
 VALID_MACHINE=$(echo -e "${LIST_MACHINES}" | grep ${MACHINE}.conf$ | wc -l)
 if [ "x$MACHINE" = "x" ] || [ "$VALID_MACHINE" = "0" ]; then
     echo -e "\nThe \$MACHINE you have specified ($MACHINE) is not supported by this build setup"
@@ -100,18 +101,13 @@ if [ -z "$DISTRO" ]; then
     DISTRO='kde-linux'
 fi
 
-OEROOT=$(readlink -f ${SOURCESDIR}/poky)
-
-cd ${OEROOT}
-
-. ./oe-init-build-env $CWD/${BUILDDIRECTORY} > /dev/null
-
 # Clean up PATH, because if it includes tokens to current directories somehow,
 # wrong binaries can be used instead of the expected ones during task execution
 export PATH="`echo $PATH | sed 's/\(:.\|:\)*:/:/g;s/^.\?://;s/:.\?$//'`"
 
 generated_config=
-if [ ! -e ${BUILDDIRECTORY}/conf ]; then
+if [ ! -d "${CWD}/${BUILDDIRECTORY}/conf" ]; then
+    echo "Prepare initial build configuration directory: ${BUILDDIRECTORY}/conf"
     QT_SUFFIX=""
     if [ ${QT6_BUILD} = true ]; then
         QT_SUFFIX="-qt6"
@@ -142,12 +138,17 @@ if [ ! -e ${BUILDDIRECTORY}/conf ]; then
     cp ${LAYERSCONF} ${CWD}/${BUILDDIRECTORY}/conf/bblayers.conf
 
     # Generate local.conf from poky example
-    cp ${SOURCESDIR}/poky/meta-poky/conf/local.conf.sample ${CWD}/${BUILDDIRECTORY}/conf/local.conf.sample
+    if [ -f ${SOURCESDIR}/poky/meta-poky/conf/local.conf.sample ]; then
+        cp ${SOURCESDIR}/poky/meta-poky/conf/local.conf.sample ${CWD}/${BUILDDIRECTORY}/conf/local.conf.sample
+    fi
+    if [ -f ${SOURCESDIR}/poky/meta-poky/conf/templates/default/local.conf.sample ]; then
+        cp ${SOURCESDIR}/poky/meta-poky/conf/templates/default/local.conf.sample ${CWD}/${BUILDDIRECTORY}/conf/local.conf.sample
+    fi
     grep -v '^#\|^$' ${CWD}/${BUILDDIRECTORY}/conf/local.conf.sample > ${CWD}/${BUILDDIRECTORY}/conf/local.conf
     sed -e "s,MACHINE ??=.*,MACHINE ??= '$MACHINE',g" \
         -e "s,SDKMACHINE ??=.*,SDKMACHINE ??= '$SDKMACHINE',g" \
         -e "s,DISTRO ?=.*,DISTRO ?= '$DISTRO',g" \
-        -i conf/local.conf
+        -i ${CWD}/${BUILDDIRECTORY}/conf/local.conf
 
     # allow building of ffmpeg
     echo "LICENSE_FLAGS_ACCEPTED=\"commercial\"" >> ${CWD}/${BUILDDIRECTORY}/conf/local.conf
@@ -191,5 +192,9 @@ EOF
 else
     echo "Your configuration files at ${BUILDDIRECTORY} have not been touched."
 fi
+
+OEROOT=$(readlink -f ${SOURCESDIR}/poky)
+cd ${OEROOT}
+. ${OEROOT}/oe-init-build-env ${CWD}/${BUILDDIRECTORY} > /dev/null
 
 clean_up
