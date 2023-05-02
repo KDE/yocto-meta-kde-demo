@@ -1,5 +1,3 @@
-inherit populate_sdk_qt5
-
 EXTRA_IMAGE_FEATURES:append = " debug-tweaks"
 
 IMAGE_INSTALL:append = " \
