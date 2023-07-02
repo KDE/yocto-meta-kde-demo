@@ -38,5 +38,5 @@ IMAGE_INSTALL:append:visionfive2 = " \
     gstreamer1.0-plugins-good \
     gstreamer1.0-plugins-bad \
     gstreamer1.0-plugins-ugly \
-    sf-gst-omx \
+    gstreamer1.0-omx \
 "
