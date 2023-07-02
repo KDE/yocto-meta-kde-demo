@@ -49,6 +49,7 @@ clean_up()
 }
 
 QT6_BUILD=false
+FORCE_RECONFIGURE=false
 
 # get command line options
 while test -n "${1}";
@@ -58,6 +59,10 @@ do
            usage
            clean_up
            return 0
+           ;;
+        -f)
+            echo "Force generation of local.conf and bblayers.conf"
+           FORCE_RECONFIGURE=true
            ;;
         --qt6)
            echo "Configure for Qt6 based build"
@@ -106,7 +111,7 @@ fi
 export PATH="`echo $PATH | sed 's/\(:.\|:\)*:/:/g;s/^.\?://;s/:.\?$//'`"
 
 generated_config=
-if [ ! -d "${CWD}/${BUILDDIRECTORY}/conf" ]; then
+if [ ! -d "${CWD}/${BUILDDIRECTORY}/conf" ] || [ ${FORCE_RECONFIGURE} = true ]; then
     echo "Prepare initial build configuration directory: ${BUILDDIRECTORY}/conf"
     QT_SUFFIX=""
     if [ ${QT6_BUILD} = true ]; then
