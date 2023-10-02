@@ -8,6 +8,7 @@ PACKAGECONFIG:append:class-target = " \
     dbus \
     udev \
     accessibility \
+    xcb \
     cups \
 "
 
