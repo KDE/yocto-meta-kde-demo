@@ -8,26 +8,27 @@ IMAGE_INSTALL:append = " \
     strace \
     kernel-modules \
     sddm \
+    sddm-plasma-mobile \
     \
     qtbase-plugins \
     qttools-tools \
+    qtdeclarative-tools \
     qtsvg-plugins \
     liberation-fonts \
     ttf-noto \
     libreoffice-dictionaries \
     \
-    packagegroup-kde-frameworks5 \
-    \
-    packagegroup-plasma-mobile \
-    packagegroup-kde-applications \
+    packagegroup-plasma-mobile-workspace \
+    packagegroup-kf6 \
     \
     heaptrack \
-    kdeconnect-kde \
     \
-    plasma-camera \
     \
     useradd-kde \
 "
+#    packagegroup-kde-applications
+#    kdeconnect-kde \
+#    plasma-camera
 
 IMAGE_INSTALL:append:raspberrypi4 = " \
     linux-firmware \
