@@ -1,3 +1,5 @@
+LICENSE = "MIT"
+
 include recipes-core/images/kde-demo-image.bb
 
 EXTRA_IMAGE_FEATURES = "debug-tweaks tools-profile"
