@@ -149,6 +149,10 @@ if [ ! -d "${CWD}/${BUILDDIRECTORY}/conf" ] || [ ${FORCE_RECONFIGURE} = true ]; 
     if [ -f ${SOURCESDIR}/poky/meta-poky/conf/templates/default/local.conf.sample ]; then
         cp ${SOURCESDIR}/poky/meta-poky/conf/templates/default/local.conf.sample ${CWD}/${BUILDDIRECTORY}/conf/local.conf.sample
     fi
+
+    # Setup site configuration
+    cp ${TEMPLATESDIR}/site.conf ${CWD}/${BUILDDIRECTORY}/conf/
+
     grep -v '^#\|^$' ${CWD}/${BUILDDIRECTORY}/conf/local.conf.sample > ${CWD}/${BUILDDIRECTORY}/conf/local.conf
     sed -e "s,MACHINE ??=.*,MACHINE ??= '$MACHINE',g" \
         -e "s,SDKMACHINE ??=.*,SDKMACHINE ??= '$SDKMACHINE',g" \
