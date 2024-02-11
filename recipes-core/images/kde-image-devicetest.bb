@@ -19,9 +19,13 @@ IMAGE_INSTALL:append = " \
     qtsvg-plugins \
     qtdeclarative-plugins \
     qtdeclarative-tools \
-    qtgraphicaleffects-qmlplugins \
-    qtquickcontrols2-qmlplugins \
+    qtdeclarative-qmlplugins \
     qtsvg-qmlplugins \
     qtwayland-plugins \
     qtwayland-qmlplugins \
+    \
+    evtest \
+    vulkan-tools \
+    vulkan-loader \
+    vulkan-samples \
 "
