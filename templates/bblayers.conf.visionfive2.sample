@@ -7,8 +7,8 @@ BBFILES ?= ""
 BBLAYERS = " \
     ${BSPDIR}/sources/meta-kde-demo \
     ${BSPDIR}/sources/meta-kde \
-    ${BSPDIR}/sources/meta-kf5 \
-    ${BSPDIR}/sources/meta-qt5 \
+    ${BSPDIR}/sources/meta-kf6 \
+    ${BSPDIR}/sources/meta-qt6 \
     ${BSPDIR}/sources/meta-java \
     ${BSPDIR}/sources/meta-openembedded/meta-networking \
     ${BSPDIR}/sources/meta-openembedded/meta-python \

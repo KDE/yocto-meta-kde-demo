@@ -43,12 +43,11 @@ MACHINE=<machine> . ${THIS_SCRIPT} <build-dir>
 
 clean_up()
 {
-    unset BUILDDIRECTORY CWD SOURCES TEMPLATES LIST_MACHINES VALID_MACHINE QT6_BUILD
+    unset BUILDDIRECTORY CWD SOURCES TEMPLATES LIST_MACHINES VALID_MACHINE
     unset MACHINE SDKMACHINE DISTRO OEROOT
     unset generated_config updated
 }
 
-QT6_BUILD=false
 FORCE_RECONFIGURE=false
 
 # get command line options
@@ -63,10 +62,6 @@ do
         -f)
             echo "Force generation of local.conf and bblayers.conf"
            FORCE_RECONFIGURE=true
-           ;;
-        --qt6)
-           echo "Configure for Qt6 based build"
-           QT6_BUILD=true
            ;;
         *)
            BUILDDIRECTORY=$1
@@ -113,18 +108,14 @@ export PATH="`echo $PATH | sed 's/\(:.\|:\)*:/:/g;s/^.\?://;s/:.\?$//'`"
 generated_config=
 if [ ! -d "${CWD}/${BUILDDIRECTORY}/conf" ] || [ ${FORCE_RECONFIGURE} = true ]; then
     echo "Prepare initial build configuration directory: ${BUILDDIRECTORY}/conf"
-    QT_SUFFIX=""
-    if [ ${QT6_BUILD} = true ]; then
-        QT_SUFFIX="-qt6"
-    fi
 
     # generate bblayers for specific hardware variant
     case ${MACHINE} in
         raspberrypi*)
-            LAYERSCONF="bblayers.conf.rpi${QT_SUFFIX}.sample"
+            LAYERSCONF="bblayers.conf.rpi.sample"
             ;;
         visionfive2*)
-            LAYERSCONF="bblayers.conf.visionfive2${QT_SUFFIX}.sample"
+            LAYERSCONF="bblayers.conf.visionfive2.sample"
             ;;
         *)
             LAYERSCONF="bblayers.conf.sample"
