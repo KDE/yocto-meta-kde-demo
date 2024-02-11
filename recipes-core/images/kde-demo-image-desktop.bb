@@ -7,9 +7,14 @@ IMAGE_FEATURES += "splash"
 IMAGE_INSTALL:append = " \
     sddm \
     packagegroup-plasma-desktop-workspace \
+    packagegroup-kde-applications \
     liberation-fonts \
     ttf-noto \
     useradd-kde \
+    evtest \
+    vulkan-tools \
+    vulkan-loader \
+    vulkan-samples \
 "
 
 # initial set of VisionFive2 tweaks
