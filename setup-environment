@@ -117,6 +117,9 @@ if [ ! -d "${CWD}/${BUILDDIRECTORY}/conf" ] || [ ${FORCE_RECONFIGURE} = true ]; 
         visionfive2*)
             LAYERSCONF="bblayers.conf.visionfive2.sample"
             ;;
+        qcom*)
+            LAYERSCONF="bblayers.conf.qcom.sample"
+            ;;
         *)
             LAYERSCONF="bblayers.conf.sample"
             ;;
