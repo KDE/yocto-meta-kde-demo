@@ -115,7 +115,10 @@ if [ ! -d "${CWD}/${BUILDDIRECTORY}/conf" ] || [ ${FORCE_RECONFIGURE} = true ]; 
             LAYERSCONF="bblayers.conf.rpi.sample"
             ;;
         visionfive2*)
-            LAYERSCONF="bblayers.conf.visionfive2.sample"
+            LAYERSCONF="bblayers.conf.riscv.sample"
+            ;;
+        beaglev-ahead*)
+            LAYERSCONF="bblayers.conf.riscv.sample"
             ;;
         qcom*)
             LAYERSCONF="bblayers.conf.qcom.sample"
