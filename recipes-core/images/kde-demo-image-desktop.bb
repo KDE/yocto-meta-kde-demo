@@ -4,6 +4,8 @@ inherit kde-demo-core-debug-tweaks
 
 IMAGE_FEATURES += "splash"
 
+PACKAGES_VULKAN ?= "${@bb.utils.contains('DISTRO_FEATURES', 'vulkan', 'vulkan-tools vulkan-loader vulkan-samples', '', d)}"
+
 IMAGE_INSTALL:append = " \
     sddm \
     packagegroup-plasma-desktop-workspace \
@@ -12,9 +14,7 @@ IMAGE_INSTALL:append = " \
     ttf-noto \
     useradd-kde \
     evtest \
-    vulkan-tools \
-    vulkan-loader \
-    vulkan-samples \
+    ${PACKAGES_VULKAN} \
 "
 
 # initial set of VisionFive2 tweaks
