@@ -13,6 +13,8 @@ PACKAGECONFIG:append:class-target = " \
 "
 
 PACKAGECONFIG_GRAPHICS:class-target = " \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'vulkan', d)} \
+    ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)} \
     gbm \
     kms \
     gles2 \
