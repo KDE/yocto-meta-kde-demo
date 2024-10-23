@@ -7,8 +7,6 @@ DEPENDS += " \
     openssl-native \
 "
 
-S = "${WORKDIR}"
-
 inherit useradd
 
 ALLOW_EMPTY:${PN} = "1"
